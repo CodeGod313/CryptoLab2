@@ -99,6 +99,12 @@ public class SDESServiceImpl implements SDESService {
         int secondIndexBlock2 = (epAfterXor.charAt(5) - CHAR_ZERO) * 2 + epAfterXor.charAt(6) - CHAR_ZERO;
         String leftBitsPair = Integer.toBinaryString(S_BLOCK1[firstIndexBlock1][secondIndexBlock1]);
         String rightBitsPair = Integer.toBinaryString(S_BLOCK2[firstIndexBlock2][secondIndexBlock2]);
+        if (leftBitsPair.length() == 1) {
+            leftBitsPair = '0' + leftBitsPair;
+        }
+        if (rightBitsPair.length() == 1) {
+            rightBitsPair = '0' + rightBitsPair;
+        }
         String bitsAfterBlocks = leftBitsPair + rightBitsPair;
         StringBuilder bitsAfterP4 = new StringBuilder();
         Arrays.stream(P4).forEach(x -> bitsAfterP4.append(bitsAfterBlocks.charAt(x)));
@@ -124,7 +130,7 @@ public class SDESServiceImpl implements SDESService {
         Arrays.stream(IP).forEach(x -> firstMix.append(sequence.charAt(x)));
         String afterFirstRound = processRound(firstMix.toString(), k1);
         String leftBits = afterFirstRound.substring(0, 4);
-        String rightBits = afterFirstRound.substring(4, 9);
+        String rightBits = afterFirstRound.substring(4, 8);
         String afterSwap = rightBits + leftBits;
         String afterSecondRound = processRound(afterSwap, k2);
         StringBuilder secondMix = new StringBuilder();

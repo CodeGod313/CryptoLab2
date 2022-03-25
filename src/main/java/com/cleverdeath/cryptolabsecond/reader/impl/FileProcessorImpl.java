@@ -23,7 +23,7 @@ public class FileProcessorImpl implements FileProcessor {
     public void writeToFile(String fileName, String text) {
         PrintWriter writer;
         try {
-            writer = new PrintWriter("EncryptedText.txt", StandardCharsets.UTF_8);
+            writer = new PrintWriter(fileName, StandardCharsets.UTF_8);
             writer.print(text);
             writer.close();
         } catch (IOException e) {
